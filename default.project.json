@@ -1,0 +1,50 @@
+{
+  "name": "deadzone",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "Shared": {
+        "$path": "src/ReplicatedStorage/Shared"
+      },
+      "Remotes": {
+        "$className": "Folder",
+        "RequestStart": { "$className": "RemoteEvent" },
+        "VoteStart": { "$className": "RemoteEvent" },
+        "OpenGate": { "$className": "RemoteEvent" },
+        "RevivePlayer": { "$className": "RemoteEvent" },
+        "FireWeapon": { "$className": "RemoteEvent" },
+        "MeleeShove": { "$className": "RemoteEvent" },
+        "StateSync": { "$className": "RemoteEvent" },
+        "PromptState": { "$className": "RemoteEvent" }
+      },
+      "Assets": {
+        "$className": "Folder",
+        "Weapons": { "$className": "Folder" },
+        "Zombies": { "$className": "Folder" },
+        "Pickups": { "$className": "Folder" }
+      }
+    },
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "Server": { "$path": "src/ServerScriptService/Server" }
+    },
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "ClientController": { "$path": "src/StarterPlayer/StarterPlayerScripts/ClientController.luau" }
+      }
+    },
+    "Workspace": {
+      "$className": "Workspace",
+      "DeadZone": {
+        "$className": "Folder",
+        "Zones": { "$className": "Folder" },
+        "Gates": { "$className": "Folder" },
+        "Loot": { "$className": "Folder" }
+      }
+    },
+    "ServerStorage": { "$className": "ServerStorage" }
+  }
+}

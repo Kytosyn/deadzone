@@ -1,0 +1,17 @@
+# Toolchain binaries (Rojo, Lune, ...) — install them, don't vendor them
+cli-tools/
+
+# Rojo build output
+*.rbxl
+*.rbxmx
+
+# Rojo server state
+.rojo
+
+# Lune / editor state
+.lune/
+.luaurc
+
+# OS noise
+.DS_Store
+Thumbs.db
