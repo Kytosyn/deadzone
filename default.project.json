@@ -40,9 +40,9 @@
       "$className": "Workspace",
       "DeadZone": {
         "$className": "Folder",
-        "Zones": { "$className": "Folder" },
-        "Gates": { "$className": "Folder" },
-        "Loot": { "$className": "Folder" }
+        "Zones": { "$path": "map/Zones" },
+        "Gates": { "$path": "map/Gates" },
+        "Loot": { "$path": "map/Loot" }
       }
     },
     "ServerStorage": { "$className": "ServerStorage" }

@@ -1,0 +1,377 @@
+{
+  "className": "Folder",
+  "children": [
+    {
+      "ClassName": "Part",
+      "Name": "mall_ground",
+      "Anchored": true,
+      "Position": [
+        0,
+        -1,
+        320
+      ],
+      "Size": [
+        120,
+        2,
+        120
+      ],
+      "Color": [
+        70,
+        70,
+        74
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_wall_1",
+      "Anchored": true,
+      "Position": [
+        0,
+        7.0,
+        260.0
+      ],
+      "Size": [
+        124,
+        14,
+        4
+      ],
+      "Color": [
+        45,
+        45,
+        50
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_wall_2",
+      "Anchored": true,
+      "Position": [
+        0,
+        7.0,
+        380.0
+      ],
+      "Size": [
+        124,
+        14,
+        4
+      ],
+      "Color": [
+        45,
+        45,
+        50
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_wall_3",
+      "Anchored": true,
+      "Position": [
+        -60.0,
+        7.0,
+        320
+      ],
+      "Size": [
+        4,
+        14,
+        124
+      ],
+      "Color": [
+        45,
+        45,
+        50
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_wall_4",
+      "Anchored": true,
+      "Position": [
+        60.0,
+        7.0,
+        320
+      ],
+      "Size": [
+        4,
+        14,
+        124
+      ],
+      "Color": [
+        45,
+        45,
+        50
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_cover_a",
+      "Anchored": true,
+      "Position": [
+        -25,
+        3,
+        300
+      ],
+      "Size": [
+        16,
+        6,
+        4
+      ],
+      "Color": [
+        60,
+        55,
+        48
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_cover_b",
+      "Anchored": true,
+      "Position": [
+        28,
+        4,
+        345
+      ],
+      "Size": [
+        4,
+        8,
+        18
+      ],
+      "Color": [
+        60,
+        55,
+        48
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_cover_c",
+      "Anchored": true,
+      "Position": [
+        5,
+        2,
+        325
+      ],
+      "Size": [
+        10,
+        4,
+        10
+      ],
+      "Color": [
+        55,
+        60,
+        58
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_spawn_1",
+      "Anchored": true,
+      "Position": [
+        -9.0,
+        0.5,
+        270.0
+      ],
+      "Size": [
+        4,
+        1,
+        4
+      ],
+      "Color": [
+        60,
+        140,
+        70
+      ],
+      "Attributes": {
+        "Role": "SpawnPoint"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_spawn_2",
+      "Anchored": true,
+      "Position": [
+        -3.0,
+        0.5,
+        270.0
+      ],
+      "Size": [
+        4,
+        1,
+        4
+      ],
+      "Color": [
+        60,
+        140,
+        70
+      ],
+      "Attributes": {
+        "Role": "SpawnPoint"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_spawn_3",
+      "Anchored": true,
+      "Position": [
+        3.0,
+        0.5,
+        270.0
+      ],
+      "Size": [
+        4,
+        1,
+        4
+      ],
+      "Color": [
+        60,
+        140,
+        70
+      ],
+      "Attributes": {
+        "Role": "SpawnPoint"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_spawn_4",
+      "Anchored": true,
+      "Position": [
+        9.0,
+        0.5,
+        270.0
+      ],
+      "Size": [
+        4,
+        1,
+        4
+      ],
+      "Color": [
+        60,
+        140,
+        70
+      ],
+      "Attributes": {
+        "Role": "SpawnPoint"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "loot_Medkit_1",
+      "Anchored": true,
+      "Position": [
+        -40,
+        1.5,
+        290
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Medkit"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "loot_Pills_1",
+      "Anchored": true,
+      "Position": [
+        -24,
+        1.5,
+        302
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Pills"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "loot_Adrenaline_1",
+      "Anchored": true,
+      "Position": [
+        -8,
+        1.5,
+        314
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Adrenaline"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "loot_AmmoPile_1",
+      "Anchored": true,
+      "Position": [
+        8,
+        1.5,
+        326
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "AmmoPile"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "loot_Bandage_1",
+      "Anchored": true,
+      "Position": [
+        24,
+        1.5,
+        338
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Bandage"
+      }
+    }
+  ]
+}

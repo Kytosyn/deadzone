@@ -1,0 +1,65 @@
+{
+  "className": "Folder",
+  "children": [
+    {
+      "ClassName": "Part",
+      "Name": "mall_gate",
+      "Anchored": true,
+      "Position": [
+        0,
+        7,
+        374.0
+      ],
+      "Size": [
+        20,
+        14,
+        4
+      ],
+      "Color": [
+        150,
+        120,
+        40
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_gatepost_l",
+      "Anchored": true,
+      "Position": [
+        -12,
+        7,
+        374.0
+      ],
+      "Size": [
+        3,
+        14,
+        5
+      ],
+      "Color": [
+        110,
+        90,
+        35
+      ]
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_gatepost_r",
+      "Anchored": true,
+      "Position": [
+        12,
+        7,
+        374.0
+      ],
+      "Size": [
+        3,
+        14,
+        5
+      ],
+      "Color": [
+        110,
+        90,
+        35
+      ]
+    }
+  ]
+}

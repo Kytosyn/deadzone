@@ -1,0 +1,437 @@
+{
+  "className": "Folder",
+  "children": [
+    {
+      "ClassName": "Part",
+      "Name": "suburbs_loot_Medkit_1",
+      "Anchored": true,
+      "Position": [
+        -40,
+        1.5,
+        -30
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Medkit"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "suburbs_loot_Pills_1",
+      "Anchored": true,
+      "Position": [
+        -24,
+        1.5,
+        -18
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Pills"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "suburbs_loot_AmmoPile_1",
+      "Anchored": true,
+      "Position": [
+        8,
+        1.5,
+        6
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "AmmoPile"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "hospital_loot_Medkit_1",
+      "Anchored": true,
+      "Position": [
+        -40,
+        1.5,
+        130
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Medkit"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "hospital_loot_Adrenaline_1",
+      "Anchored": true,
+      "Position": [
+        -8,
+        1.5,
+        154
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Adrenaline"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "hospital_loot_AmmoPile_1",
+      "Anchored": true,
+      "Position": [
+        8,
+        1.5,
+        166
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "AmmoPile"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "hospital_loot_Bandage_1",
+      "Anchored": true,
+      "Position": [
+        24,
+        1.5,
+        178
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Bandage"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_loot_Medkit_1",
+      "Anchored": true,
+      "Position": [
+        -40,
+        1.5,
+        290
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Medkit"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_loot_Pills_1",
+      "Anchored": true,
+      "Position": [
+        -24,
+        1.5,
+        302
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Pills"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_loot_Adrenaline_1",
+      "Anchored": true,
+      "Position": [
+        -8,
+        1.5,
+        314
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Adrenaline"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_loot_AmmoPile_1",
+      "Anchored": true,
+      "Position": [
+        8,
+        1.5,
+        326
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "AmmoPile"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "mall_loot_Bandage_1",
+      "Anchored": true,
+      "Position": [
+        24,
+        1.5,
+        338
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Bandage"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "base_loot_Medkit_1",
+      "Anchored": true,
+      "Position": [
+        -40,
+        1.5,
+        450
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Medkit"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "base_loot_Pills_1",
+      "Anchored": true,
+      "Position": [
+        -24,
+        1.5,
+        462
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Pills"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "base_loot_Adrenaline_1",
+      "Anchored": true,
+      "Position": [
+        -8,
+        1.5,
+        474
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Adrenaline"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "base_loot_AmmoPile_1",
+      "Anchored": true,
+      "Position": [
+        8,
+        1.5,
+        486
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "AmmoPile"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "base_loot_AmmoPile_2",
+      "Anchored": true,
+      "Position": [
+        15,
+        1.5,
+        491
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "AmmoPile"
+      }
+    },
+    {
+      "ClassName": "Part",
+      "Name": "base_loot_Bandage_1",
+      "Anchored": true,
+      "Position": [
+        24,
+        1.5,
+        498
+      ],
+      "Size": [
+        2,
+        3,
+        2
+      ],
+      "Color": [
+        190,
+        170,
+        60
+      ],
+      "Attributes": {
+        "Role": "Pickup",
+        "Kind": "Bandage"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "folders": {
+    "Zones/suburbs": 15,
+    "Gates/suburbs": 3,
+    "Zones/hospital": 16,
+    "Gates/hospital": 3,
+    "Zones/mall": 17,
+    "Gates/mall": 3,
+    "Zones/base": 19,
+    "Gates/base": 3,
+    "Loot": 18
+  },
+  "total_parts": 97
+}
