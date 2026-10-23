@@ -141,7 +141,19 @@ end
 
 -- ---------------------------------------------------------------- module loader
 
-local SOURCE_ROOT = "/data/workspace/deadzone/src"
+-- Resolve the source root from this file's own absolute path so the suite runs
+-- on any machine, instead of a hardcoded dev-box path. `debug.info` returns an
+-- absolute path in Lune regardless of the working directory.
+local function scriptDir(): string
+	local here = debug.info(1, "s") -- ".../tests/mock"
+	local slash = here:match("()[^/]*$")
+	if slash then
+		return here:sub(1, slash - 1)
+	end
+	return "."
+end
+
+local SOURCE_ROOT = scriptDir() .. "/../src"
 
 local MODULE_MAP: { [string]: string } = {
 	["ReplicatedStorage.Shared.Config"] = SOURCE_ROOT .. "/ReplicatedStorage/Shared/Config.luau",
