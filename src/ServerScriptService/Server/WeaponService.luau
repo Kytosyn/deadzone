@@ -63,10 +63,57 @@ function WeaponService:_raycast(origin: Vector3, direction: Vector3, range: numb
 	return workspace:Raycast(origin, direction * range, params)
 end
 
+-- Reject a fire/shove request whose claimed origin is not where the player
+-- actually is. A client that sends its own origin could otherwise shoot through
+-- walls or from across the map. The origin is replaced with the character root
+-- position, so the client's vector is only a plausibility check.
+local MAX_ORIGIN_DELTA = 12
+
+local function _isValidVector3(v: any): boolean
+	return typeof(v) == "Vector3" and v.X == v.X and v.Y == v.Y and v.Z == v.Z
+end
+
+local function _validUnitDirection(v: any): boolean
+	if not _isValidVector3(v) then
+		return false
+	end
+	local mag = v.Magnitude
+	return mag > 0.5 and mag < 2
+end
+
+function WeaponService:_authorisedOrigin(player: Player, origin: Vector3?): Vector3?
+	if not origin then
+		return nil
+	end
+	if not _isValidVector3(origin) then
+		return nil
+	end
+	local char = player.Character
+	local root = char and char:FindFirstChild("HumanoidRootPart")
+	if not root then
+		return nil
+	end
+	if (origin - root.Position).Magnitude > MAX_ORIGIN_DELTA then
+		return nil
+	end
+	return root.Position
+end
+
 -- Fire a weapon. `slot` is "primary" or "secondary".
 function WeaponService:Fire(player: Player, slot: string, origin: Vector3, direction: Vector3): boolean
 	local lo = self._loadouts[player]
 	if not lo then
+		return false
+	end
+	if slot ~= "primary" and slot ~= "secondary" then
+		return false
+	end
+	if not _validUnitDirection(direction) then
+		return false
+	end
+	-- Trust the player's position, never the client's claimed origin.
+	origin = self:_authorisedOrigin(player, origin)
+	if not origin then
 		return false
 	end
 	local weapon = if slot == "primary" then lo.primary else lo.secondary
@@ -98,11 +145,13 @@ function WeaponService:Fire(player: Player, slot: string, origin: Vector3, direc
 	if hit and hit.Instance then
 		local humanoid = hit.Instance:FindFirstAncestorOfClass("Model")
 			and hit.Instance:FindFirstAncestorOfClass("Model"):FindFirstChildOfClass("Humanoid")
-		if humanoid then
+		-- Only the server's own zombies (created by ZombieAI) may take weapon
+		-- damage, and only via the PlayerManager's authoritative health.
+		if humanoid and humanoid.Parent:GetAttribute("ZombieKind") then
 			local model = humanoid.Parent
 			local isHead = hit.Instance.Name == "Head"
 			local mult = if isHead then cfg.HeadshotMultiplier else 1
-			humanoid:TakeDamage(cfg.Damage * mult)
+			self._playerManager:DamageZombie(model, cfg.Damage * mult)
 
 			-- Kill credit: report to whoever owns this model.
 			self:_creditKill(model, player)
@@ -164,6 +213,14 @@ function WeaponService:Shove(player: Player, origin: Vector3, direction: Vector3
 	if not lo then
 		return false
 	end
+	if not _validUnitDirection(direction) then
+		return false
+	end
+	-- Trust the player's position, never the client's claimed origin.
+	origin = self:_authorisedOrigin(player, origin)
+	if not origin then
+		return false
+	end
 	local now = tick()
 	if now - lo.lastShove < Config.Melee.ShoveCooldown then
 		return false
@@ -183,6 +240,9 @@ function WeaponService:Shove(player: Player, origin: Vector3, direction: Vector3
 				local dir = (root.Position - origin)
 				dir = Vector3.new(dir.X, 0, dir.Z)
 				if dir.Magnitude > 0 then
+					-- Push away from the shooter, computed server-side from the
+					-- shooter's own position. The client's direction argument is
+					-- never used as the push vector.
 					root.AssemblyLinearVelocity = dir.Unit * Config.Melee.ShoveForce
 						+ Vector3.new(0, 25, 0)
 					pushed += 1

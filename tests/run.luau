@@ -159,7 +159,10 @@ check("loadout starts full", lo.primary.magazine == Config.Primary.Magazine)
 
 -- Firing consumes ammo. The mock raycast hits nothing, so we only assert the
 -- bookkeeping and the anti-cheat gate.
-local origin = Vector3.new(0, 3, 0)
+-- First-person origin: the camera sits at the head, just above the character
+-- root at (0, 3, 0). WeaponService checks the claimed origin against the
+-- player's real position, so the test must send a plausible one.
+local origin = Vector3.new(0, 3.6, 0)
 local dir = Vector3.new(0, 0, -1)
 check("first shot is accepted", ws:Fire(p1.instance, "primary", origin, dir) == true)
 check("ammo was consumed", ws:GetLoadout(p1.instance).primary.magazine == Config.Primary.Magazine - 1)
@@ -169,6 +172,19 @@ check("rate limit rejects an instant second shot",
 	ws:Fire(p1.instance, "primary", origin, dir) == false)
 check("no ammo was consumed by the rejected shot",
 	ws:GetLoadout(p1.instance).primary.magazine == Config.Primary.Magazine - 1)
+
+-- A client that claims to be shooting from somewhere it is not must be refused,
+-- even with ammo in the magazine. This is the origin-spoof check.
+local spoofOrigin = Vector3.new(0, 3.6, 0) + Vector3.new(500, 0, 0)
+local magBeforeSpoof = ws:GetLoadout(p1.instance).primary.magazine
+check("a spoofed origin is rejected", ws:Fire(p1.instance, "primary", spoofOrigin, dir) == false)
+check("a spoofed origin spends no ammo",
+	ws:GetLoadout(p1.instance).primary.magazine == magBeforeSpoof)
+check("a non-unit direction is rejected", ws:Fire(p1.instance, "primary", origin, Vector3.new(0, 0, 0)) == false)
+check("an unknown slot is rejected", ws:Fire(p1.instance, "launcher", origin, dir) == false)
+check("a shot uses the server's position, not the client's claim",
+	mock.lastRaycast ~= nil and (mock.lastRaycast.origin - Vector3.new(0, 3, 0)).Magnitude < 0.01,
+	"origin=" .. tostring(mock.lastRaycast and mock.lastRaycast.origin))
 
 -- Shove has its own cooldown. Give the region a fake zombie so there is
 -- something to push, which is what the shove actually reports on.
@@ -193,6 +209,9 @@ local shoveOk = ws:Shove(p1.instance, origin, dir)
 check("shove is accepted once", shoveOk == true)
 check("shove cooldown rejects an immediate second shove",
 	ws:Shove(p1.instance, origin, dir) == false)
+-- The shove's origin is checked the same way as a shot.
+check("shove with a spoofed origin is rejected",
+	ws:Shove(p1.instance, spoofOrigin, dir) == false)
 
 -- ---------------------------------------------------------------- summary
 

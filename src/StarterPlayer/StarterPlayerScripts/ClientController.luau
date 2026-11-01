@@ -211,7 +211,11 @@ function Client:_shove()
 end
 
 function Client:_reload()
-	Remotes.FireWeapon:FireServer("primary", Vector3.new(0, -9999, 0), Vector3.new(0, 1, 0))
+	-- A reload is not a shot: there is no remote for it. The server reloads
+	-- automatically when the magazine runs dry and there is reserve ammo, so
+	-- firing here would have spent a bullet and re-triggered the anti-cheat
+	-- rate limit. Nothing to send; the HUD picks the new ammo up from StateSync.
+	return
 end
 
 function Client:_interact()

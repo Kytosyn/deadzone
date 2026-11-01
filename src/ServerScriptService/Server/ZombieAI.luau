@@ -661,7 +661,7 @@ function ZombieAI:_updateTank(z: Zombie, dt: number)
 			local char = p.Character
 			local r = char and char:FindFirstChild("HumanoidRootPart")
 			if r and (r.Position - root.Position).Magnitude <= cfg.SlamRadius then
-				self._playerManager:Damage(p, cfg.SlamDamage, "Tank")
+				self._playerManager:DamagePlayer(p, cfg.SlamDamage, "Tank")
 			end
 		end
 		return
@@ -670,9 +670,7 @@ function ZombieAI:_updateTank(z: Zombie, dt: number)
 	if dist > cfg.SlamRadius and z.cooldown <= -2 then
 		-- Throw debris at range.
 		z.cooldown = cfg.DebrisCooldown
-		local dir = (theirRoot.Position - root.Position).Unit
-		self._playerManager:Damage(target, cfg.DebrisDamage, "Tank")
-		_ = dir
+		self._playerManager:DamagePlayer(target, cfg.DebrisDamage, "Tank")
 	end
 
 	if z.nextRepath <= 0 then

@@ -16,6 +16,11 @@ local Vector3 = roblox.Vector3
 
 local mock = {}
 
+-- Debug hook for the test suite: the mock's Workspace:Raycast and
+-- FindPartsInRegion3 are implemented with implementMethod, so their behaviour
+-- is not directly inspectable from a test.
+mock.lastRaycast = nil
+
 -- ---------------------------------------------------------------- instance helpers
 
 local function makeInstance(className: string, name: string, parent: Instance?): Instance
@@ -59,6 +64,7 @@ local LootFolder = makeInstance("Folder", "Loot", DeadZone)
 
 type FakePlayer = { name: string, instance: Instance, character: Instance? }
 local players: { FakePlayer } = {}
+local characters: { [Instance]: Instance } = {}
 
 roblox.implementMethod("Players", "GetPlayers", function()
 	local out = {}
@@ -66,6 +72,11 @@ roblox.implementMethod("Players", "GetPlayers", function()
 		table.insert(out, p.instance)
 	end
 	return out
+end)
+
+roblox.implementMethod("Humanoid", "TakeDamage", function(self: Instance, _amount: number)
+	-- Health is not simulated in the harness; the call just has to not throw,
+	-- which it does in a real place.
 end)
 
 roblox.implementMethod("PathfindingService", "CreatePath", function(_: Instance)
@@ -88,8 +99,9 @@ roblox.implementMethod("Debris", "AddItem", function(_: Instance, _inst: Instanc
 -- by tests via mock.regionZombies so shove/area logic has something to hit.
 mock.regionZombies = {}
 
-roblox.implementMethod("Workspace", "Raycast", function(_: Instance, _origin: Vector3, _dir: Vector3, _p: any?): any
+roblox.implementMethod("Workspace", "Raycast", function(_: Instance, origin: Vector3, dir: Vector3, _p: any?): any
 	-- No geometry in the harness, so no shot ever connects.
+	mock.lastRaycast = { origin = origin, dir = dir }
 	return nil
 end)
 
@@ -127,6 +139,11 @@ local function addPlayer(name: string): FakePlayer
 	local root = makeInstance("Part", "HumanoidRootPart", char)
 	root.Size = Vector3.new(2, 2, 1)
 	root.Position = Vector3.new(0, 3, 0)
+	-- A Head so first-person fire origins (head + ~0.6) sit inside the
+	-- WeaponService origin tolerance of the character root.
+	local head = makeInstance("Part", "Head", char)
+	head.Size = Vector3.new(1, 1, 1)
+	head.Position = root.Position + Vector3.new(0, 0.6, 0)
 	local hum = makeInstance("Humanoid", "Humanoid", char)
 	hum.MaxHealth = 100
 	hum.Health = 100
@@ -136,6 +153,21 @@ local function addPlayer(name: string): FakePlayer
 
 	local entry: FakePlayer = { name = name, instance = p, character = char }
 	table.insert(players, entry)
+
+	-- Roblox's engine links a Model with a Humanoid in Workspace to the player
+	-- automatically; Lune does not, so the harness has to do it explicitly or
+	-- every server-side player lookup (WeaponService's origin check, ZoneManager
+	-- teleports, revives) would see no character.
+	local ok = pcall(function()
+		p.Character = char
+	end)
+	if not ok then
+		characters[p] = char
+		roblox.implementProperty("Player", "Character", function(self: Instance)
+			return characters[self]
+		end)
+	end
+
 	return entry
 end
 

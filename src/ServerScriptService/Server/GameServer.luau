@@ -26,6 +26,7 @@ function GameServer.new()
 
 	self.State = "lobby"
 	self.Remotes = ReplicatedStorage.Remotes
+	self._lastStart = 0
 
 	self.PlayerManager = PlayerManager.new()
 	self.ZoneManager = ZoneManager.new()
@@ -92,12 +93,13 @@ function GameServer:_hookRemotes()
 		self.WeaponService:Shove(player, origin, direction)
 	end)
 
-	R.RevivePlayer.OnServerEvent:Connect(function(player, target)
+	R.RevivePlayer.OnServerEvent:Connect(function(player)
 		if self.State ~= "playing" then
 			return
 		end
-		local st = self.PlayerManager:GetState(target)
-		if st and st.down then
+		-- The client only asks; the server picks who is down and near enough.
+		local target = self.PlayerManager:NearestDowned(player)
+		if target then
 			self.PlayerManager:Revive(target, player)
 		end
 		self:_syncAll()
@@ -118,6 +120,13 @@ function GameServer:_hookRemotes()
 	end)
 
 	R.RequestStart.OnServerEvent:Connect(function(player)
+		-- Any player can start the run; that is a party vote by design. It is
+		-- rate-limited because it resets the whole world.
+		local now = tick()
+		if now - self._lastStart < 5 then
+			return
+		end
+		self._lastStart = now
 		if self.State == "lobby" then
 			self:_beginRun()
 		end

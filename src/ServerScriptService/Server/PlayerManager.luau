@@ -158,6 +158,30 @@ function PlayerManager:Revive(player: Player, reviver: Player?)
 	end
 end
 
+-- The reviver asks; the server decides. Pick the closest downed player within
+-- arm's reach of the reviver, so a client cannot revive anyone, anywhere.
+function PlayerManager:NearestDowned(reviver: Player): Player?
+	local char = reviver.Character
+	local root = char and char:FindFirstChild("HumanoidRootPart")
+	if not root then
+		return nil
+	end
+	local best, bestDist = nil, Config.ReviveRange
+	for _, st in pairs(self._states) do
+		if st.down then
+			local theirRoot = st.player.Character
+				and st.player.Character:FindFirstChild("HumanoidRootPart")
+			if theirRoot then
+				local d = (theirRoot.Position - root.Position).Magnitude
+				if d < bestDist then
+					best, bestDist = st.player, d
+				end
+			end
+		end
+	end
+	return best
+end
+
 function PlayerManager:Pin(player: Player, duration: number)
 	local st = self._states[player]
 	if not st then
@@ -202,6 +226,41 @@ function PlayerManager:AddKill(player: Player)
 	if st then
 		st.kills += 1
 	end
+end
+
+-- Damage a zombie model. Called only by WeaponService, which has already
+-- raycast server-side, so the target is the server's own instance; the amount
+-- is still clamped so a malformed packet can't produce absurd damage.
+function PlayerManager:DamageZombie(model: Instance, amount: number)
+	if typeof(amount) ~= "number" or amount ~= amount or amount <= 0 then
+		return
+	end
+	local hum = model:FindFirstChildOfClass("Humanoid")
+	if not hum then
+		return
+	end
+	amount = math.min(amount, Config.ZombieDamageMax)
+	hum:TakeDamage(amount)
+end
+
+-- Apply knockback to a player's character from a server-trusted direction.
+-- ZombieAI asks for this instead of writing AssemblyLinearVelocity directly,
+-- so the velocity is always built on the server.
+function PlayerManager:KnockbackPlayer(player: Player, direction: Vector3, damage: number)
+	self:Knockback(player, direction, damage)
+end
+
+-- ---------------------------------------------------------------- anti-cheat
+-- A client cannot damage a specific player: there is no remote that takes a
+-- victim. The helpers below exist so the whole server reaches players' health
+-- through one checked path instead of poking Humanoids directly.
+
+function PlayerManager:DamagePlayer(player: Player, amount: number, source: string?)
+	if typeof(amount) ~= "number" or amount ~= amount or amount <= 0 then
+		return
+	end
+	amount = math.min(amount, Config.PlayerDamageMax)
+	self:Damage(player, amount, source)
 end
 
 function PlayerManager:AllStates(): { PlayerState }

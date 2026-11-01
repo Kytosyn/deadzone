@@ -9,6 +9,15 @@ Config.MaxPlayers = 4
 Config.MinPlayersToStart = 1          -- MVP: solo is allowed so it's testable
 Config.LobbyCountdown = 10
 
+-- Hard ceiling on a single server-side weapon hit against a zombie. Balancing
+-- values are much lower; this only stops a malformed packet from doing absurd
+-- damage through the shared DamageZombie clamp.
+Config.ZombieDamageMax = 500
+
+-- Same idea for damage routed through PlayerManager:DamagePlayer, which is the
+-- only path the rest of the server uses to hurt a player.
+Config.PlayerDamageMax = 500
+
 -- ---------------------------------------------------------------- health
 Config.MaxHealth = 100
 Config.BandageHeal = 30               -- stops bleed-out only, no temp HP
@@ -21,6 +30,7 @@ Config.DownBleedOut = 30              -- seconds before a downed player dies
 Config.ReviveChannelTime = 3
 Config.ReviveHealth = 10
 Config.ReviveInvulnerability = 2
+Config.ReviveRange = 8                -- studs: who a reviver may actually reach
 
 -- ---------------------------------------------------------------- weapons
 Config.Primary = {
